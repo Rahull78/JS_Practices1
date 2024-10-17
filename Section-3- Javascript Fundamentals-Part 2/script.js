@@ -82,3 +82,46 @@ const yearsUntillRetirement = (birthYear, name) => {
 };
 
 console.log(yearsUntillRetirement(1950, "Rahul"));
+
+const personInfo = {
+  firstname: "rahul",
+  lastname: "modi",
+  birthyear: 2002,
+  age: 22,
+  Location: "Ahemdabad",
+  haslinces: true,
+};
+console.log(personInfo);
+console.log(personInfo.birthyear);
+console.log(personInfo["lastname"]);
+
+const year = "year";
+console.log(personInfo["birth" + year]);
+
+const prompt = require("prompt-sync")();
+
+const info = prompt(
+  "what do you know about the rahul ? job,firstname,lastname,age: "
+);
+console.log(personInfo[info]);
+
+const personInfo1 = {
+  firstname: "rahul",
+  lastname: "Modi",
+  birthyear: 2002,
+  age: 22,
+  Location: "Ahemdabad",
+  haslinces: true,
+
+  calAge: function () {
+    this.age = 2033 - this.birthyear;
+    return this.age;
+  },
+};
+console.log(personInfo1.age);
+console.log(personInfo1);
+
+let i;
+for (i = 0; i <= 10; i++) {
+  console.log(`Ratan Sir Was Icon oF India : ${i}`);
+}

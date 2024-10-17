@@ -94,3 +94,53 @@ const percentages = [
   percentage(population[0]), //one doubt why dont we store the multiple percentage inside the array
 ];
 console.log(percentages);
+
+/*1. Create an object called 'myCountry' for a country of your choice, containing 
+properties 'country', 'capital', 'language', 'population' and 
+'neighbours' (an array like we used in previous assignments*/
+
+const myCountry = {
+  country: "India",
+  capital: "Delhi",
+  Language: "Hindi",
+  Population: "1.5 Billion",
+};
+console.log(myCountry);
+
+/*. Add a method called 'describe' to the 'myCountry' object. This method 
+will log a string to the console, similar to the string logged in the previous 
+assignment, but this time using the 'this' keyword.
+2. Call the 'describe' method
+3. Add a method called 'checkIsland' to the 'myCountry' object. This 
+method will set a new property on the object, called 'isIsland'. 
+'isIsland' will be true if there are no neighbouring countries, and false if 
+there are. Use the ternary operator to set the property*/
+
+const myCountryTwo = {
+  country: "India",
+  capital: "Delhi",
+  Language: "Hindi",
+  Population: "1.5 Billion",
+  neghbours: ["delhi", "swedan", "Asia", "isIsland"],
+
+  Describe: function () {
+    console.log(
+      `my countary is ${this.country} were we have Capital city ${this.capital} we spoke ${this.Language} where we have population of ${this.Population}`
+    );
+  },
+  checkIsland: function () {
+    this.isIsland = this.neghbours.length === 0 ? true : false;
+  },
+};
+myCountryTwo.Describe();
+myCountryTwo.checkIsland();
+console.log(myCountryTwo);
+
+/*1. There are elections in your country! In a small town, there are only 50 voters. 
+Use a for loop to simulate the 50 people voting, by logging a string like this to 
+the console (for numbers 1 to 50): 'Voter number 1 is currently votin*/
+
+let i;
+for (i = 0; i <= 50; i++) {
+  console.log(`'Voter number ${i} is currently voting`);
+}
