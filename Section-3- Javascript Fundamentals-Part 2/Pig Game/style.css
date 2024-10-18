@@ -170,3 +170,16 @@ main {
 .hidden {
   display: none;
 }
+
+.high-score {
+  font-size: 4rem;
+  font-weight: 400;
+  color: #c7365f;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.player--active .high-score {
+  font-weight: 700;
+  color: #fff;
+}

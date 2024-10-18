@@ -24,14 +24,25 @@ const init = function () {
   currentScore = 0;
   activePlayer = 0;
   playing = true;
-  highScores = [0, 0]; // Initialize high scores
+
+  //   Set the High Score into Local Storage using Array
+  highScores = [
+    localStorage.getItem("highScore0")
+      ? Number(localStorage.getItem("highScore0"))
+      : 0,
+    localStorage.getItem("highScore1")
+      ? Number(localStorage.getItem("highScore1"))
+      : 0,
+  ];
 
   score0El.textContent = 0;
   score1El.textContent = 0;
   current0El.textContent = 0;
   current1El.textContent = 0;
-  highScore0El.textContent = "High Score: 0"; // Reset High Score UI
-  highScore1El.textContent = "High Score: 0"; // Reset High Score UI
+
+  //   Display the Updated score using LocalStorage
+  highScore0El.textContent = `High Score: ${highScores[0]}`;
+  highScore1El.textContent = `High Score: ${highScores[1]}`;
 
   // Hide the dice at the start
   diceEl.classList.add("hidden");
@@ -41,7 +52,8 @@ const init = function () {
   player1El.classList.remove("player--active");
 };
 
-init();
+// Reloading from new game button
+window.onload = init;
 
 const switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
@@ -54,11 +66,8 @@ const switchPlayer = function () {
 // Rolling Dice Functionality
 btnRoll.addEventListener("click", function () {
   if (playing) {
-    console.log("Roll button clicked"); // Debugging log to check if button is working
-
     // Generate Dice Roll
     const dice = Math.trunc(Math.random() * 6) + 1;
-    console.log(`Dice rolled: ${dice}`); // Debugging log to check dice value
 
     // Display Dice
     diceEl.classList.remove("hidden");
@@ -79,8 +88,6 @@ btnRoll.addEventListener("click", function () {
 
 btnHold.addEventListener("click", function () {
   if (playing) {
-    console.log("Hold button clicked"); // Debugging log to check if hold button is working
-
     // Add Current Score to active player's score
     scores[activePlayer] += currentScore;
     document.getElementById(`score--${activePlayer}`).textContent =
@@ -89,10 +96,14 @@ btnHold.addEventListener("click", function () {
     // Update high score if current score is higher
     if (scores[activePlayer] > highScores[activePlayer]) {
       highScores[activePlayer] = scores[activePlayer];
+
       document.getElementById(
         `high-score--${activePlayer}`
       ).textContent = `High Score: ${highScores[activePlayer]}`;
     }
+
+    // Save & Updating to the Local Storage
+    localStorage.setItem(`highScore${activePlayer}`, highScores[activePlayer]);
 
     // Check if player's score is >= 100 to finish game
     if (scores[activePlayer] >= 100) {
@@ -112,4 +123,16 @@ btnHold.addEventListener("click", function () {
 });
 
 // New Game button functionality
-btnNew.addEventListener("click", init);
+btnNew.addEventListener("click", function () {
+  scores = [0, 0];
+  currentScore = 0;
+  activePlayer = 0;
+  playing = true;
+
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+
+  location.reload();
+});
